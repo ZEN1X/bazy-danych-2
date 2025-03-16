@@ -1,0 +1,7 @@
+Setup stanowiska:
+- Uzyskałem dostęp RDP do maszyny wirtualnej Windows z poziomu stanowiska w sali i własnego laptopa (tunel SSH + local port forward przez taurusa).
+- Uruchomiłem i podłączyłem się do instacji MS SQL przy pomocy SSMS.
+- Bazy AdventureWorks2019 i AdventureWorksDW2019 były już zaimportowane.
+
+- Utworzyłem zapasową bazę danych w usłudze Azure i uzyskałem do niej dostęp poprzez DataGrip.
+    - Niestety, pomimo prób nie udało mi się zmigrować baz AdventureWorks2019 i AdventureWorksDW2019 do bazy w usłudze Azure.

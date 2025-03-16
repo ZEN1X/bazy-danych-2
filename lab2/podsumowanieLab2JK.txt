@@ -1,0 +1,16 @@
+Zadanie 1 (zapytania SQL w pliku lab2_task1.sql):
+ - a) wytłumaczone wraz z przykładem
+ - b) zrealizowane w 100% (wynik kwerend w pliku task1b.png)
+  - I. wykorzystałem tabelę tymczasową
+  - II. CTE
+
+Zadanie 2 (lab2_task2.sql):
+ - zrealizowane w 100% (wynik kwerendy w pliku task2.png)
+ - mała uwaga, w AW2019 nie ma [Purchasing].[VendorAddress], tylko [Person].[BusinessEntityAddress]
+ - NoOfVendors - ilość / liczba dostawców
+
+Zadanie 3 (lab2_task3.sql):
+ - a) Utworzyłem tabelę przestawną przy wykorzystaniu CASE do zapytania nr 2.
+  - wynik kwerend w pliku task3a.png
+ - b) Zrealizowałem w 100%, wykorzystując UNION ALL do połączenia kolejnych PIVOT'ów.
+  - wynik kwerend w pliku task3b.png
