@@ -12,6 +12,9 @@
     <file url="file://$PROJECT_DIR$/lab3/lab3_learning/lab3_B.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/lab3/lab3_learning/lab3_C.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/lab3/lab3_learning/lab3_D.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/lab3/lab3_task1.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/lab3/lab3_task2.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/lab3/lab3_task3.sql" dialect="TSQL" />
     <file url="PROJECT" dialect="TSQL" />
   </component>
 </project>
