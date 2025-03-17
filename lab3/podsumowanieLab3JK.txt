@@ -1,0 +1,14 @@
+Zadanie 1 (lab3_task1.sql):
+ - zrealizowane w 100%
+ - wynik przykładu użycia funkcji (dla ID 33) w pliku task1.png
+ - wykorzystałem coalesce(), bo gdyby jedna z kolumn była null, to cały nchar byłby null
+ - left joiny, bo niektóre osoby nie mają przypisanej jednej z kolumn
+
+Zadanie 2 (lab3_task2.sql):
+ - zrealizowane w 100%
+ - wynik przykładu użycia funkcji (dla 1 i 25) w pliku task2.png
+ - zamiast offset ... rows fetch next ... rows można użyć row_number()
+
+Zadanie 3 (lab3_task3.sql):
+ - zrealizowane w 100%
+ - wynik przykładu użycia funkcji (dla 'Kim Abercrombie') w pliku task3.png
