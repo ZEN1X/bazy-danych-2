@@ -1,0 +1,14 @@
+Zadanie 1 (lab4_task1.sql):
+ - zrealizowane w 100%
+ - wynik przykładu użycia procedury w pliku task1.png
+ - wydaje mi się, że nie muszę wywoływać "deallocate PersonCursor;"
+  - "close" zwalnia lock, a "deallocate" wywoła się implicit przy wyjściu z scope'a procedury
+
+Zadanie 2 (lab4_task2.sql):
+ - zrealizowane w 100%
+ - wynik przykładu użycia wyzwalacza w pliku task2.png
+
+Zadanie 3 (lab4_task3.sql):
+ - zrealizowane w 100%
+ - wyniki przykładu użycia procedury w pliku task3.png
+  - procedura sprawdza czy ID > 0 i czy w ogóle produkt o takim ID istnieje
