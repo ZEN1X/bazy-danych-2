@@ -19,23 +19,32 @@ begin
     declare @ID int;
     declare @FirstName name;
     declare @LastName name;
-    declare @out nvarchar(100);
+    declare @Phone phone;
+    declare @Email nvarchar(50);
 
     -- kursor
-    declare PersonCursor cursor fast_forward for select top 8 BusinessEntityID, FirstName, LastName
-                                                 from Person.Person
+    declare PersonCursor cursor fast_forward for select top 8 p.BusinessEntityID,
+                                                              FirstName,
+                                                              LastName,
+                                                              PhoneNumber,
+                                                              EmailAddress
+                                                 from Person.Person                p
+                                                          join Person.PersonPhone  pp on p.BusinessEntityID = pp.BusinessEntityID
+                                                          join Person.EmailAddress ea on p.BusinessEntityID = ea.BusinessEntityID
+                                                 where pp.PhoneNumberTypeID = 1
                                                  order by LastName, FirstName;
 
     -- otwarcie kursora i wczytanie pierwszego wiersza
     open PersonCursor;
-    fetch next from PersonCursor into @ID, @FirstName, @LastName;
+    fetch next from PersonCursor into @ID, @FirstName, @LastName, @Phone, @Email;
 
     -- pętla wczytująca kolejne wiersze
     while @@fetch_status = 0 begin
-        set @out = concat('ID: ', @ID, ' Name: ', @FirstName, ' ', @LastName);
-        print @out;
+        print concat('ID: ', @ID, ' Name: ', @FirstName, ' ', @LastName);
+        print concat('- Phone: ', @Phone);
+        print concat('- Email: ', @Email);
 
-        fetch next from PersonCursor into @ID, @FirstName, @LastName;
+        fetch next from PersonCursor into @ID, @FirstName, @LastName, @Phone, @Email;
     end
 
     -- zwolnienie zasobów
