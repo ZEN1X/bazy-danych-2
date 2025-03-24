@@ -7,8 +7,11 @@ Zadanie 1 (lab4_task1.sql):
 Zadanie 2 (lab4_task2.sql):
  - zrealizowane w 100%
  - wynik przykładu użycia wyzwalacza w pliku task2.png
+ - trigger wypisuje: imię, nazwisko i ID wprowadzonej osoby
 
 Zadanie 3 (lab4_task3.sql):
  - zrealizowane w 100%
  - wyniki przykładu użycia procedury w pliku task3.png
-  - procedura sprawdza czy ID > 0 i czy w ogóle produkt o takim ID istnieje
+ - procedura sprawdza czy ID > 0 i czy w ogóle produkt o takim ID istnieje
+  - jeśli tak, to wypisuje informacje o produkcie
+  - jeśli nie, to wypisuje wiadomość z błędem przy użyciu RAISERROR()
