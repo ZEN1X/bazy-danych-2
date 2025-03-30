@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="BD2@bd2.database.windows.net" uuid="2ecd1152-4935-40af-bb95-32547832b8ce">
-      <driver-ref>azure.ms</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
-      <jdbc-url>jdbc:sqlserver://bd2.database.windows.net:1433;database=BD2;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
     <data-source source="LOCAL" name="BD2" uuid="f91c36dd-2e02-4005-9655-e515c0e01ad0">
       <driver-ref>sqlserver.jtds</driver-ref>
       <synchronize>true</synchronize>
