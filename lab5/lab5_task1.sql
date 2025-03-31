@@ -42,3 +42,13 @@ where princ.name in ('WINSERV01\grupa1', 'WINSERV01\grupa2');
  Chodzi mi tutaj o to, że mamy sam login (czyli na poziomie server), a nie user (na poziomie bazy).
  Oczywiście, gdy mamy / stworzymy user i zrobimy mapping, to będzie on miał rolę public (database role).
  */
+
+-- Trzeba by wykonać poniższe polecenia
+use [AdventureWorks2019];
+go
+
+create user [WINSERV01\grupa1] for login [WINSERV01\grupa1];
+go
+
+create user [WINSERV01\grupa2] for login [WINSERV01\grupa2];
+go
