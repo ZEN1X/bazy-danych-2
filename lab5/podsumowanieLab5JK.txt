@@ -4,3 +4,8 @@ Zadanie 1 (lab5_task1.sql):
  - utworzyłem loginy do serwera dla grup
  - wynik działań zamieściłem w zrzutach task1.png, task1a.png i task1b.png (widać parametry DefaultDatabase i DenyWindowsLogin)
  - odpowiedzi na pytania znajdują się w pliku lab5_task1.sql
+
+Zadanie 2 (lab5_task2.sql):
+ - zrealizowane w 100%
+ - utworzyłem użytkowników i grupy tak, jak w zadaniu 1
+ - wyniki działań w task2.png, task2a.png, task2b.png
