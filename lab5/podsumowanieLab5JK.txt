@@ -1,0 +1,6 @@
+Zadanie 1 (lab5_task1.sql):
+ - zrealizowane w 100%
+ - utworzyłem konta i grupy w systemie Windows przy pomoc wiersza poleceń (net user / net localgroup) i przystawki lusrmgr.msc
+ - utworzyłem loginy do serwera dla grup
+ - wynik działań zamieściłem w zrzutach task1.png, task1a.png i task1b.png (widać parametry DefaultDatabase i DenyWindowsLogin)
+ - odpowiedzi na pytania znajdują się w pliku lab5_task1.sql
