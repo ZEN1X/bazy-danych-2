@@ -9,3 +9,8 @@ Zadanie 2 (lab5_task2.sql):
  - zrealizowane w 100%
  - utworzyłem użytkowników i grupy tak, jak w zadaniu 1
  - wyniki działań w task2.png, task2a.png, task2b.png
+
+Zadanie 3 (lab5_task3.sql):
+ - zrealizowane w 100%
+ - ustawiłem wszystko według polecenia dla grupa1, grupa2, tester3, tester2 i tester4
+ - wykonałem także część dot. procedury (Lab04.26)
