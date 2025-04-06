@@ -39,12 +39,7 @@ go
 use [Lab6db];
 go
 
-if exists ( select name
-            from sys.database_principals
-            where name = 'Lab6user' )
-    begin
-        drop user [Lab6user];
-    end
+drop user if exists [Lab6user];
 go
 
 create user [Lab6user] for login [Lab6user];
