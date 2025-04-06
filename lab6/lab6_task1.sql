@@ -11,7 +11,7 @@ go
 
 -- tworzymy nowy login
 if exists ( select name
-            from sys.database_principals
+            from sys.server_principals
             where name = 'Lab6user' )
     begin
         drop login [Lab6user];
