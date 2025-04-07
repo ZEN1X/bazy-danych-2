@@ -44,27 +44,27 @@ namespace Lab6
 
         static void ImportCSV()
         {
-            ImportData("student.csv", "INSERT INTO student (id, fname, lname) VALUES (@id, @fname, @lname)", (cmd, parts) =>
+            ImportData("data/student.csv", "INSERT INTO student (id, fname, lname) VALUES (@id, @fname, @lname)", (cmd, parts) =>
             {
                 cmd.Parameters.AddWithValue("@id", int.Parse(parts[0]));
                 cmd.Parameters.AddWithValue("@fname", parts[1]);
                 cmd.Parameters.AddWithValue("@lname", parts[2]);
             });
 
-            ImportData("wykladowca.csv", "INSERT INTO wykladowca (id, fname, lname) VALUES (@id, @fname, @lname)", (cmd, parts) =>
+            ImportData("data/wykladowca.csv", "INSERT INTO wykladowca (id, fname, lname) VALUES (@id, @fname, @lname)", (cmd, parts) =>
             {
                 cmd.Parameters.AddWithValue("@id", int.Parse(parts[0]));
                 cmd.Parameters.AddWithValue("@fname", parts[1]);
                 cmd.Parameters.AddWithValue("@lname", parts[2]);
             });
 
-            ImportData("przedmiot.csv", "INSERT INTO przedmiot (id, name) VALUES (@id, @name)", (cmd, parts) =>
+            ImportData("data/przedmiot.csv", "INSERT INTO przedmiot (id, name) VALUES (@id, @name)", (cmd, parts) =>
             {
                 cmd.Parameters.AddWithValue("@id", int.Parse(parts[0]));
                 cmd.Parameters.AddWithValue("@name", parts[1]);
             });
 
-            ImportData("grupa.csv", "INSERT INTO grupa (id_wykl, id_stud, id_przed) VALUES (@id_wykl, @id_stud, @id_przed)", (cmd, parts) =>
+            ImportData("data/grupa.csv", "INSERT INTO grupa (id_wykl, id_stud, id_przed) VALUES (@id_wykl, @id_stud, @id_przed)", (cmd, parts) =>
             {
                 cmd.Parameters.AddWithValue("@id_wykl", int.Parse(parts[0]));
                 cmd.Parameters.AddWithValue("@id_stud", int.Parse(parts[1]));
@@ -84,6 +84,8 @@ namespace Lab6
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
+                conn.Open();
+
                 foreach (string line in lines)
                 {
                     if (string.IsNullOrWhiteSpace(line))
