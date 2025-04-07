@@ -1,0 +1,11 @@
+Zadanie 1 (lab6_task1.sql):
+ - zrealizowane w 100%
+ - utworzyłem użytkownika SQL (łatwiej testować)
+
+Zadanie 2 (lab6_task2.sql):
+ - zrealizowane w 100%
+
+Zadanie 3 (lab6_task3.cs):
+ - zrealizowane w 100%
+ - potrzebujemy plików csv (w folderze data)
+ - prezentacja realizacji w lab6_task3.png
