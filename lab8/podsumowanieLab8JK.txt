@@ -1,0 +1,11 @@
+Zadanie 1 (lab8_task1.cs):
+ - zrealizowane w 100%
+
+Zadanie 2 (lab8_task2.cs):
+ - zrealizowane w 100%
+
+Zadanie 3 (lab8_task3.cs):
+ - zrealizowane w 100%
+
+W lab8_upload_assemblies.sql wgrywane są assembly na SQL Server.
+W lab8_test_assemblies.sql testowane są wykonania funkcji i procedur.
