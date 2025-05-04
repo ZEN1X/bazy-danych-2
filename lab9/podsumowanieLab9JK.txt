@@ -1,0 +1,11 @@
+Zadanie 1 (lab9_task1.cs):
+ - zrealizowane w 100%
+
+Zadanie 2 (lab9_task2.cs):
+ - zrealizowane w 100%
+
+Zadanie 3 (lab9_task3.cs):
+ - zrealizowane w 100%
+
+W lab9_upload_assemblies.sql wgrywane są assembly na SQL Server.
+W lab9_test_assemblies.sql testowane są wykonania dla typów i funkcji agregujących.
