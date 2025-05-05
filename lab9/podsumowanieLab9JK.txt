@@ -1,11 +1,22 @@
 Zadanie 1 (lab9_task1.cs):
  - zrealizowane w 100%
+ - wynik działania w task1.png
 
 Zadanie 2 (lab9_task2.cs):
  - zrealizowane w 100%
+ - wynik działania w task2.png
 
 Zadanie 3 (lab9_task3.cs):
  - zrealizowane w 100%
+ - wynik działania w task3.png
+
+ built-in:
+  SQL Server Execution Times:
+  CPU time = 15 ms,  elapsed time = 16 ms.
+
+ custom:
+  SQL Server Execution Times:
+  CPU time = 94 ms,  elapsed time = 96 ms.
 
 W lab9_upload_assemblies.sql wgrywane są assembly na SQL Server.
 W lab9_test_assemblies.sql testowane są wykonania dla typów i funkcji agregujących.
