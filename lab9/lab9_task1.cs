@@ -1,5 +1,6 @@
 using System;
 using System.Data.SqlTypes;
+using System.Text.RegularExpressions;
 using Microsoft.SqlServer.Server;
 
 [Serializable]
@@ -49,21 +50,24 @@ public struct ComplexNumber : INullable
         set => _y = value;
     }
 
-    public override string ToString() => _x.ToString() + "+" + _y.ToString() + "i";
+    public override string ToString() => _x.ToString() + (_y >= 0 ? "+" : "") + _y.ToString() + "i";
 
     public static ComplexNumber Parse(SqlString s)
     {
-        if (s.IsNull || s.Value.Trim() == "")
+        if (s.IsNull || string.IsNullOrWhiteSpace(s.Value))
             return Null;
 
-        string value = s.Value;
+        string input = s.Value.Trim();
 
-        string xstr = value.Substring(0, value.IndexOf('+'));
-        string ystr = value.Substring(value.IndexOf('+') + 1,
-            value.Length - xstr.Length - 2);
-        double xx = double.Parse(xstr);
-        double yy = double.Parse(ystr);
-        return new ComplexNumber(xx, yy);
+        var match = Regex.Match(input, @"^\s*([+-]?\d+(?:\.\d+)?)\s*([+-]\s*\d+(?:\.\d+)?)i\s*$");
+
+        if (!match.Success)
+            throw new FormatException("Input must be in the format 'a+bi' or 'a-bi'");
+
+        double real = double.Parse(match.Groups[1].Value);
+        double imaginary = double.Parse(match.Groups[2].Value.Replace(" ", ""));
+
+        return new ComplexNumber(real, imaginary);
     }
 
     public static ComplexNumber Add(ComplexNumber c1, ComplexNumber c2) => new ComplexNumber(c1._x + c2._x, c1._y + c2._y);
