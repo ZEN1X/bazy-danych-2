@@ -1,0 +1,10 @@
+Zadanie 1 (lab10_task1.cs):
+ - zrealizowane w 100%
+ - wynik działania w task1.png
+
+Zadanie 2 (lab10_task2.cs):
+ - zrealizowane w 100%
+ - wynik działania w task2.png
+
+W lab10_prepare.sql przygotowywane są tabele.
+W lab10_testing.sql testowane są wykonania triggera i procedury.
