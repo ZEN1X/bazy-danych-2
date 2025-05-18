@@ -1,0 +1,11 @@
+Zadanie 1 (lab11_task1.sql):
+ - zrealizowane w 100%
+ - wynik działania w task1.png
+
+Zadanie 2 (lab11_task2.sql):
+ - zrealizowane w 100%
+ - wynik działania w task2.png
+
+Zadanie 3 (lab11_task3.sql):
+ - zrealizowane w 100%
+ - wynik działania w task3.png
