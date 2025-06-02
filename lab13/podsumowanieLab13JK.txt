@@ -1,0 +1,102 @@
+1. Projekt bazy danych:
+  - zawarty w pliku lab13.sql
+  - diagramy w plikach ERD_diagram.{png,svg}
+
+2. Skalowalność:
+ 2.1 Dzielenie poziome
+  - tabele można dzielić poziomo, z wykorzystaniem PARTITION BY RANGE
+  - np. dla tabel (FrequencyMeasurement, VoltageMeasurement, …) można utworzyć funkcję partycjonującą
+    po MeasurementTime w przedziałach miesięcznych i użyć partycji w osobnych plikach/grupach plików
+  - dzięki temu stare dane (np. starsze niż rok) można archiwizować, a zapytania na ostatnim miesiącu korzystają tylko z jednej partycji.
+
+ 2.2 Dzielenie na grupy plików (FILEGROUP)
+  - umieścić nowe partycje w oddzielnych grupach plików
+
+ 2.3 Indeksowanie
+  - podstawowy (clustered) indeks na (SessionID, MeasurementTime, Phase)
+  - klauzula INCLUDE na kolumnach najczęściej używanych w WHERE/ORDER BY
+
+ 2.4 Archiwizacja
+  - dane historyczne można przenosić do archiwum (jeśli chmura to np. Azure Blob Storage)
+  - dzięki podziałowi na FILEGROUP, ułatwiona archiwizacja
+
+ 2.5 Integracja nowych urządzeń
+  - struktura MeasurementDevice i DeviceVendor pozwala dołączać urządzenia innych firm bez modyfikacji tabel
+
+ 2.6 Ładowanie danych
+  - importowanie danych CSV można by przeprowadzić za pomocą Azure Data Broker (chmura) lub SQL Service Broker (on premises)
+
+ 2.7 Sharding
+  - w przypadku dużej ilości lokalizacji pomiarowych, można pomyśleć o rozbiciu danych na wiele instancji, np. per region
+  - wykorzystanie Linked Servers
+
+3. Bezpieczeństwo danych:
+ 3.1 TDE - Transparent Data Encryption
+  - na poziomie bazy można włączyć TDE (ALTER DATABASE PowerQualityDB SET ENCRYPTION ON)
+
+ 3.2 Role i uprawnienia
+  - tworzymy role bazodanowe (np. db_readers, db_analysts, db_operators) i przypisujemy do nich minimalne uprawnienia:
+   - db_operators może wstawiać/aktualizować dane pomiarowe (INSERT, UPDATE na tabelach pomiarowych)
+   - db_analysts ma prawo do wykonywania widoków / funkcji analitycznych, ale nie do modyfikacji oryginalnych danych
+   - db_readers może tylko odczytywać dane (SELECT)
+  - role takie jak: sysadmin, db_owner przydzielamy tylko wybranym administratorom
+
+ 3.3 Podział na schemy
+  - tabele pomiarowe umieszczamy np. w schemacie dbo, a widoki analityczne w schemacie analytics
+  - dzięki temu uprawnienia można przydzielać selektywnie na poziomie schemy
+
+ 3.4 Row Level Security (RLS)
+  - jeśli niektóre punkty pomiarowe lub sesje mają być widoczne tylko dla wybranych użytkowników,
+    można skonfigurować RLS, które filtruje dane na poziomie wiersza
+
+ 3.5 Audyty
+  - włączamy SQL Server Audit
+  - dzięki temu możemy rejestrować polecenia DML na tabelach
+  - audyty i logi można zapisywać do plików lub dedykowanej tabeli
+
+ 3.6 Kontrola integralności
+  - dodajemy CHECK CONSTRAINTS np. na FrequencyHZ
+
+ 3.7 Zabezpieczenie sieciowe bazy danych (trochę off-topic)
+  - lista zaufanych (zakresów) adresów IP
+  - firewall
+  - szyfrowanie TLS (trzeba wygenerować certyfikat) dla połączeń
+
+4. Analityka danych:
+ 4.1 Analiza częstotliwości (freq_analytics.sql)
+  Zgodnie z Rozporządzeniem Systemowym:
+   - kryterium 1: 99,5% czasu tygodnia wartość częstotliwości powinna być w przedziale 49,5 Hz ... 50,5 Hz
+   - kryterium 2: 100% czasu tygodnia wartość częstotliwości powinna być w przedziale 47 Hz ... 52 Hz
+
+  Załóżmy, że analizę chcemy policzyć dla danego punktu pomiarowego i danego tygodnia (okresy tygodniowe zaczynające się w poniedziałek o 00:00):
+
+  Kroki:
+   1. Odfiltrować rekordy z tabeli FrequencyMeasurement dla wszystkich sesji z danego LocationID oraz dla przedziału PeriodStart..PeriodEnd.
+   2. Policzyć liczbę rekordów, w których FrequencyHz BETWEEN 49.5 AND 50.5.
+   3. Obliczyć odsetek: (ilość w zakresie 49.5–50.5) / (łączna liczba pomiarów w analizowanym okresie).
+   4. Dla kryterium 2 analogicznie, liczba rekordów, w których FrequencyHz BETWEEN 47 AND 52.
+
+ 4.2 Analiza napięcia (volt_analytics.sql)
+  Zgodnie z Rozporządzeniem:
+   - 95% 10-minutowych wartości skutecznych napięcia powinno być w przedziale od –10% do +10% napięcia znamionowego U_n
+
+   Przyjmujemy, że:
+    - Dla każdej sesji pobieramy napięcia w tabeli VoltageMeasurement co 10s (średnia, min, max).
+    - Aby ocenić 10-minutowe wartości skuteczne RMS, tworzymy tabelę VoltageRMSMeasurement.
+
+  4.2.1 Widok oceny zgodności napięcia
+   Tworzymy widok, który dla każdego punktu (LocationID) i tygodnia (PeriodStart ... PeriodEnd) obliczy:
+    - Całkowitą liczbę 10-minutowych pomiarów.
+    - Liczbę tych pomiarów, w których RMSVoltage BETWEEN 0.9*Un AND 1.1*Un.
+
+5. Zaawansowane funkcjonalności:
+ - Partycjonowanie tabel (https://learn.microsoft.com/en-us/sql/relational-databases/partitions/partitioned-tables-and-indexes)
+ - Indeksy COLUMNSTORE, dla dużych tabeli, np. VoltageMeasurement (https://learn.microsoft.com/en-us/sql/relational-databases/indexes/columnstore-indexes-overview)
+   przyspieszy to agregację i analizę OLAP
+ - Temporal Tables, umożliwiają automatyczne wersjonowanie danych historycznych (https://learn.microsoft.com/en-us/sql/relational-databases/tables/temporal-tables)
+ - Row-Level Security (RLS), punkt 3
+ - Service Broker
+  - asynchroniczne przetwarzanie wiadomości
+  - można dedykować kolejki do przyjmowania plików CSV lub komunikatów z urządzeń, a potem wywoływać procedury składowane
+ - SQL CLR
+  - jeśli chcemy wykonać niestandardowe obliczenia (np. FFT sygnału napięciowego), możemy napisać kod w C# i zarejestrować go jako procedurę CLR
